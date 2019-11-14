@@ -1,27 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 const DashboardLayout = () => import( /* webpackChunkName: "dashboard" */ '../components/dashboardLayout.vue')
-        function loadView(view) {
-            return () => import(
-                /* webpackChunkName: "view-
-                    [request]" */
-                `../components/dashboardContents/${view}.vue`)
-        }
-        const routes = [{
-            path: '/',
-            component: DashboardLayout,
-            children: [{
-                name: 'UserController',
-                path: '',
-                component: loadView('userController')
-            }]
-        }, ]
 
-        Vue.use(Router)
+function loadView(view) {
+    return () => import(
+        /* webpackChunkName: "view-
+            [request]" */
+        `../components/dashboardContents/${view}.vue`)
+}
+const routes = [{
+    path: '/',
+    component: DashboardLayout,
+    children: [{
+        name: 'UserController',
+        path: 'user',
+        component: loadView('userController')
+    },
+    {
+        name: 'ServiceController',
+        path: 'service',
+        component: loadView('serviceController')
+    }]
+}, ]
 
-        const router = new Router({
-            mode: 'history',
-            routes: routes
-        })
+Vue.use(Router)
 
-        export default router
+const router = new Router({
+    mode: 'history',
+    routes: routes
+})
+
+export default router

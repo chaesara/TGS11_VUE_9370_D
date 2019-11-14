@@ -18,7 +18,9 @@
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        <v-list-item-title>
+                            <v-btn text router v-bind:to="item.route">{{item.title}}</v-btn>
+                        </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -30,30 +32,36 @@
         </v-navigation-drawer>
         <v-app-bar dark app fixed clipped-left height="70px" color="grey darken-3">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-                <VSpacer/>
+            <VSpacer />
 
 
-                <img src="../assets/logo.svg" style="height:45px;width:45px">
+            <img src="../assets/logo.svg" style="height:45px;width:45px">
 
-                <v-toolbar-title style="font-size: 21px;" class="white--text ml-2">
-                    PAW-UAJY
-                </v-toolbar-title>
+            <v-toolbar-title style="font-size: 21px;" class="white--text ml-2">
+                PAW-UAJY
+            </v-toolbar-title>
         </v-app-bar>
         <VContent>
             <router-view />
         </VContent>
     </div>
 </template>
-
 <script>
     export default {
         data() {
             return {
                 drawer: null,
                 items: [{
-                    title: 'User Controller',
-                    icon: 'mdi-human-male'
-                }, ],
+                        title: 'User Controller',
+                        icon: 'mdi-human-male',
+                        route: '/user'
+                    },
+                    {
+                        title: 'Services Controller',
+                        icon: 'mdi-human-male',
+                        route: '/service'
+                    },
+                ],
             }
         },
     }
